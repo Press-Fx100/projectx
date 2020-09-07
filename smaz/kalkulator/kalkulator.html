@@ -1,0 +1,211 @@
+﻿<script src="../assets/plugins/jquery/jquery.min.js"></script>
+<script src="../assets/plugins/popper/umd/popper.min.js"></script>
+							
+<script type="text/javascript">
+	
+	//calculation
+	$(document).ready(function () {
+		
+   		$('input').keyup(function () {
+
+			var var_40 = 0.4;
+			var var_60 = 0.6;
+
+			var var_a = $('#a').val();
+			var_a = Number((var_a).replace(/\,/g,''));
+
+			var var_b = var_a * var_40;
+			
+			var var_c = var_a * var_60;
+			
+			var var_d = $('#d').val();
+			var_d = Number((var_d).replace(/\,/g,''));
+
+			var var_e = var_c - var_d;
+
+			var var_f = $('#f').val();
+			var_f = Number((var_f).replace(/\,/g,''));
+
+			var var_g = $('#g').val();
+			var_g = Number((var_g).replace(/\,/g,''));
+
+			var var_h = var_f / var_g;
+
+			var var_i = var_e - var_h;
+
+
+			if(Number.isNaN(var_b) || var_b === Infinity || var_b === -Infinity){
+				$('#td_b').html(0);
+			}else{
+				$('#td_b').html(thousands_separators(var_b.toFixed(2)));
+			}
+			if(Number.isNaN(var_c) || var_c === Infinity || var_c === -Infinity){
+				$('#td_c').html(0);
+			}else{
+				$('#td_c').html(thousands_separators(var_c.toFixed(2)));
+			}
+			if(Number.isNaN(var_e) || var_e === Infinity || var_e === -Infinity){
+				$('#td_e').html(0);
+			}else{
+				$('#td_e').html(thousands_separators(var_e.toFixed(2)));
+			}
+			if(Number.isNaN(var_h) || var_h === Infinity || var_h === -Infinity){
+				$('#td_h').html(0);
+			}else{
+				$('#td_h').html(thousands_separators(var_h.toFixed(2)));
+			}
+			if(Number.isNaN(var_i) || var_i === Infinity || var_i === -Infinity){
+				$('#td_i').html(0);
+			}else{
+				$('#td_i').html(thousands_separators(var_i.toFixed(2)));
+				if(var_i < 0){
+					$('#td_ans').html('TIDAK LAYAK');
+				}else{
+					$('#td_ans').html('LAYAK');
+				}
+			}
+				
+    	});
+	});
+
+	//thousand separator for output
+	function thousands_separators(num){
+    	var num_parts = num.toString().split(".");
+	    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    	return num_parts.join(".");
+	}
+</script>
+			
+<table style="background-color:#C7D6D5" class="table table-borderless table-striped table-fixed table-light text-dark"  width="100%">
+				<tr style="text-align:center; background-color:#1C2541; color:white; font-size: 18px;">
+					<th scope="col">KOD</td>
+					<th scope="col" colspan= "4">PERKARA</td>
+					<th scope="col" colspan= "2">RM</td>
+				</tr>
+				<tr>
+					<th style="text-align:center; vertical-align: middle" scope="row">a</td>
+					<td style="vertical-align: middle" colspan= "4">Emolumen (Gaji Pokok & Elaun)</td>							
+					<td style="text-align:center" colspan= "2"><input type='text' class="form-control form-control-sm inputnumber" style="text-align:center" id='a' value='0'></td>
+				</tr>
+				<tr>
+					<th style="text-align:center" scope="row">b</td>
+					<td  colspan= "4">40% Daripada Gaji Kasar <b>(b = a x 0.4)</b></td>	
+					<td style="text-align:center" colspan= "2" id='td_b'>0</td>
+				</tr>
+				<tr>
+					<th style="text-align:center" scope="row">c</td>
+					<td  colspan= "4">60% Daripada Gaji Kasar <b>(c = a x 0.6)</b></td>					
+					<td style="text-align:center" colspan= "2" id='td_c'>0</td>
+				</tr>
+				<tr>
+					<th style="text-align:center" scope="row">d</td>
+					<td  colspan= "4">Potongan Wajib <b>(Mengikut Slip Gaji)</b></td>
+					<td style="text-align:center" colspan= "2"><input type='text' class="form-control form-control-sm inputnumber" style="text-align:center" id='d' value='0'></td>
+				</tr>
+				<tr>
+					<th style="text-align:center" scope="row">e</td>
+					<td colspan= "4">Baki Selepas Potongan <b>(e = c-d)</b></td>					
+					<td style="text-align:center" colspan= "2" id='td_e'>0</td>
+				</tr>
+				<tr>
+					<th style="text-align:center" scope="row">f</td>
+					<td colspan= "4">Jumlah Pinjaman (RM)</td>
+					<td style="text-align:center" colspan= "2"><input type='text' class="form-control form-control-sm inputnumber" style="text-align:center" id='f' value='0'></td>
+				</tr>
+				<tr>
+					<th style="text-align:center" scope="row">g</td>
+					<td colspan= "4">Tempoh Pinjaman (Bulan)</td>				
+					<td style="text-align:center" colspan= "2"><input type='text' class="form-control form-control-sm inputnumber" style="text-align:center" id='g' value='0'></td>
+				</tr>
+				<tr>
+					<th style="text-align:center" scope="row">h</td>
+					<td colspan= "4">Kadar Bayaran Bulanan <b>(h=f&#247;g)</b></td>
+					<td style="text-align:center" colspan= "2" id='td_h'>0</td>
+				</tr>
+				<tr>
+					<th style="text-align:center" scope="row">i</td>
+					<td colspan= "4"><b>BAKI GAJI (i = e-h)*</b></td>
+					<td style="text-align:center; font-weight:bold" colspan= "2" id='td_i'>0</td>
+				</tr>
+				<tr style="text-align:center; font-weight:bold;  background-color:#1C2541; color:white;  font-size: 18px;">
+					<td colspan="2" scope="row">CATATAN</td>
+					<td colspan="3" scope="row"></td>
+					<td colspan="2" scope="row">KEPUTUSAN</td>
+				</tr>
+				<tr style="font-weight:bold">
+					<td style="text-align:right;" scope="row">*</td>
+					<td colspan="1">LAYAK<br>TIDAK LAYAK</td>
+					<td colspan="3">: Lebihan<br>: Tiada lebihan</td>
+					<td colspan="2" style='font-size: 18px; text-align:center; vertical-align: middle; font-weight:bold; color:red;' id='td_ans' class='blink_me'></td>
+				</tr>
+				<tr>
+					<td colspan="7"><br></td>
+				</tr>
+				<tr style="background-color:#1C2541; color:white;  font-size: 18px;">
+					<th style="text-align:center;" colspan="7" scope="col">MAKLUMAT PINJAMAN</td>
+				</tr>
+				<tr style="text-align:center">
+					<th style="background-color:#3A506B; color:white" scope="row">Jenis Pinjaman</td>
+					<td style="background-color:#2A9134; color:white" colspan= "2" width="28%"><b>Qardhul Hassan</b></td>
+					<td style="background-color:#006494; color:white" colspan= "2" width="28%"><b>Komputer</b></td>
+					<td style="background-color:#C08552; color:white" colspan= "2" width="28%"><b>Kenderaan</b></td>
+				</tr>
+				<tr style="text-align:center">
+					<th style="background-color:#3A506B; color:white" scope="row">Taraf Jawatan</td>
+					<td style="background-color:#5BBA6F; font-weight:bold" width="14%">Tetap</td>
+					<td style="background-color:#5BBA6F; font-weight:bold" width="14%">Kontrak</td>
+					<td style="background-color:#83C5BE; font-weight:bold" width="14%">Tetap</td>
+					<td style="background-color:#83C5BE; font-weight:bold" width="14%">Kontrak</td>
+					<td style="background-color:#DAB49D; font-weight:bold" width="14%">Tetap</td>
+					<td style="background-color:#DAB49D; font-weight:bold" width="14%">Kontrak</td>
+				</tr>
+				<tr style="text-align:center">
+					<th style="background-color:#3A506B; color:white" scope="row">Kelayakan</td>
+					<td style="background-color:#5BBA6F; "><span><b>&#10003;</b></span></td>
+					<td style="background-color:#5BBA6F; "><span><b>&#10003;</b></span></td>
+					<td style="background-color:#83C5BE; "><span><b>&#10003;</b></span></td>
+					<td style="background-color:#83C5BE; "><b>X</b></td>
+					<td style="background-color:#DAB49D"><span><b>&#10003;</b></span></td>
+					<td style="background-color:#DAB49D"><b>X</b></td>	
+				</tr>
+				<tr style="text-align:center">
+					<th style="background-color:#3A506B; color:white; vertical-align: middle" scope="row">Jumlah Pinjaman<br>(RM)</td>
+					<td style="background-color:#5BBA6F; font-weight:bold">1,000.00 -<br>10,000.00</td>
+					<td style="background-color:#5BBA6F; font-weight:bold">1,000.00 -<br>10,000.00</td>
+					<td style="background-color:#83C5BE; font-weight:bold; vertical-align: middle">5,000.00</td>
+					<td  rowspan= "2" style="background-color:#006494; "></td>
+					<td  style="background-color:#DAB49D; font-weight:bold; vertical-align: middle" rowspan= "2">Tertakluk kepada<br>Pekeliling<br>Perbendaharaan<br>Malaysia WP9.3</td>
+					<td  rowspan= "2" style="background-color:#C08552"></td>
+				</tr>
+				<tr style="text-align:center">
+					<th style="background-color:#3A506B; color:white; vertical-align: middle" scope="row">Tempoh Pinjaman</td>
+					<td style="background-color:#5BBA6F; font-weight:bold">12 Bulan -<br>48 Bulan</td>
+					<td style="background-color:#5BBA6F; font-weight:bold">6 Bulan -<br>22 Bulan</td>
+					<td style="background-color:#83C5BE; font-weight:bold">12 Bulan -<br>48 Bulan</td>
+				</tr>
+</table>
+				
+<!--script here-->
+<Script>
+	//thousand separator
+$('input.inputnumber').keyup(function(event) {
+  if (event.which >= 37 && event.which <= 40) return;
+  $(this).val(function(index, value) {
+    return value
+      // Keep only digits, decimal points, and dashes at the start of the string:
+      .replace(/[^\d.-]|(?!^)-/g, "")
+      // Remove duplicated decimal points, if they exist:
+      .replace(/^([^.]*\.)(.*$)/, (_, g1, g2) => g1 + g2.replace(/\./g, ''))
+      // Keep only two digits past the decimal point:
+      .replace(/\.(\d{2})\d+/, '.$1')
+      // Add thousands separators:
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  });
+});
+//blinking text
+(function blink() { 
+  $('.blink_me').fadeOut(500).fadeIn(500, blink); 
+})();
+</Script>
+
+				

@@ -1,0 +1,64 @@
+<html>
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('input').keyup(function () {
+
+        var arg1 = parseFloat($('#in1').val());
+        var arg2 = parseFloat($('#in2').val());
+        var arg3 = parseFloat($('#in3').val());
+        var arg4 = parseFloat($('#in4').val());
+
+        $('#tdin1').html(((arg4 + 6.275 * (arg3) - 1.218 * (arg2)) / 0.497));
+        $('#tdin2').html((arg4 + 6.275 * (arg3) - 0.497 * (arg1)) / 1.218);
+        $('#tdin3').html(((arg4 - 1.218 * (arg2) - 0.497 * (arg1)) / 6.275) * -1);
+        $('#tdin4').html(1.218 * (arg2) + 0.497 * (arg1) - 6.275 * (arg3));
+
+        var i = 1;
+        for (i = 1; i <= 4; i++) {
+            if ($('#tdin' + i).html() == 'NaN') {
+                $('#tdin' + i).html('');
+            }
+        }
+
+
+
+    });
+});
+</script>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Input Data Here</th>
+        <th>Results Are Shown Here</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><label for="in1">Submergence in inches</label></td>
+        <td><input type="text" id="in1" /></td>
+        <td id="tdin1"></td>
+      </tr>
+      <tr>
+        <td><label for="in2">Air Supply (LPM)</label></td>
+        <td><input type="text" id="in2" /></td>
+        <td id="tdin2"></td>
+      </tr>
+      <tr>
+        <td><label for="in3">Lift in inches</label></td>
+        <td><input type="text" id="in3" /></td>
+        <td id="tdin3"></td>
+      </tr>
+      <tr>
+        <td><label for="in4">Water Flow Produced (GPM)</label></td>
+        <td><input type="text" id="in4" /></td>
+        <td id="tdin4"></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
