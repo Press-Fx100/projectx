@@ -65,7 +65,7 @@
         let r = JSON.parse(this.response);
         
         let chart_settings = {
-          type: "line",
+          type: "bar",
           
           data: {
             

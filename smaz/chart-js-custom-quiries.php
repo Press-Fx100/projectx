@@ -18,27 +18,52 @@ $ip2 = explode("-",$ip)[1];
 $count = "";
 $item = "";
 
-if($cawangan == "-"){
-  $getData = "SELECT COUNT(xcawangan_id) AS count, xcawangan_id AS item FROM runtimeerrors";
-  $label = "Cawangan";
-}else{
-  if($controller == "-"){
-    $getData = "SELECT COUNT(smazcontroller) AS count, smazcontroller AS item FROM runtimeerrors WHERE xcawangan_id = '$cawangan'";
-    $label = $cawangan;
+if($ip != "-"){
+  if($cawangan == "-"){
+    $getData = "SELECT COUNT(runtimeerrors.user_id) AS count, runtimeerrors.username AS item FROM runtimeerrors";
+    $label = "Cawangan";
   }else{
-    if($action == "-"){
-      $getData = "SELECT COUNT(smazaction) AS count, smazaction AS item FROM runtimeerrors WHERE xcawangan_id = '$cawangan' AND smazcontroller = '$controller'";
-      $label = $controller;
+    if($controller == "-"){
+      $getData = "SELECT COUNT(smazcontroller) AS count, smazcontroller AS item FROM runtimeerrors WHERE xcawangan_id = '$cawangan'";
+      $label = $cawangan;
     }else{
-      $getData = "SELECT COUNT(users.id) AS count, users.username AS item
-      FROM runtimeerrors JOIN users ON users.id = runtimeerrors.user_id 
-      WHERE runtimeerrors.xcawangan_id = '$cawangan' 
-      AND runtimeerrors.smazcontroller = '$controller' 
-      AND runtimeerrors.smazaction = '$action'";
-      $label = 'action';
+      if($action == "-"){
+        $getData = "SELECT COUNT(smazaction) AS count, smazaction AS item FROM runtimeerrors WHERE xcawangan_id = '$cawangan' AND smazcontroller = '$controller'";
+        $label = $controller;
+      }else{
+        $getData = "SELECT COUNT(runtimeerrors.smazaction) AS count, users.username AS item
+        FROM runtimeerrors JOIN users ON users.id = runtimeerrors.user_id 
+        WHERE runtimeerrors.xcawangan_id = '$cawangan' 
+        AND runtimeerrors.smazcontroller = '$controller' 
+        AND runtimeerrors.smazaction = '$action'";
+        $label = 'action';
+      }
+    }
+  }
+}else{
+  if($cawangan == "-"){
+    $getData = "SELECT COUNT(xcawangan_id) AS count, xcawangan_id AS item FROM runtimeerrors";
+    $label = "Cawangan";
+  }else{
+    if($controller == "-"){
+      $getData = "SELECT COUNT(smazcontroller) AS count, smazcontroller AS item FROM runtimeerrors WHERE xcawangan_id = '$cawangan'";
+      $label = $cawangan;
+    }else{
+      if($action == "-"){
+        $getData = "SELECT COUNT(smazaction) AS count, smazaction AS item FROM runtimeerrors WHERE xcawangan_id = '$cawangan' AND smazcontroller = '$controller'";
+        $label = $controller;
+      }else{
+        $getData = "SELECT COUNT(users.id) AS count, users.username AS item
+        FROM runtimeerrors JOIN users ON users.id = runtimeerrors.user_id 
+        WHERE runtimeerrors.xcawangan_id = '$cawangan' 
+        AND runtimeerrors.smazcontroller = '$controller' 
+        AND runtimeerrors.smazaction = '$action'";
+        $label = 'action';
+      }
     }
   }
 }
+
 
 if($time != "-"){
   if($time1 == $time2){
@@ -86,10 +111,6 @@ if($cawangan == "-"){
     }
   }
 }
-/*if($action != "-"){
-    $getData = "SELECT COUNT(smazaction) AS count, s FROM runtimeerrors GROUP BY xcawangan_id";
-}*/
-//$getData = "SELECT COUNT(smazcontroller) AS count, smazcontroller FROM runtimeerrors WHERE xcawangan_id = '$itemselect' GROUP BY smazcontroller";
 
 $rows = $dbConnected->query($getData);
 $rowcount = $rows->num_rows;
