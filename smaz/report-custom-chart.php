@@ -59,6 +59,51 @@
           </div>-->
         <!-- /.card-footer-->
         </div>
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Table</b></h3>
+            <!--<div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                <i class="fas fa-times"></i></button>
+            </div>-->
+          </div>
+          
+          <div class="card-body">
+           <!--content here-->
+
+           <?php include("table-custom.php"); ?>
+
+           </div>     
+          <!-- /.card-body -->
+        </div>
+          </div>
+          <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Timeline</b></h3>
+            <!--<div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                <i class="fas fa-times"></i></button>
+            </div>-->
+          </div>
+          
+          <div class="card-body">
+           <!--content here-->
+
+           <?php include("timeline-custom.php"); ?>
+
+           </div>     
+          <!-- /.card-body -->
+        </div>
+          </div>
+        </div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -75,5 +120,25 @@
 <script src="../assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables -->
+<script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      "ordering": false,
+      "lengthChange": false,
+      "searching": false,
+      "info": false,
+      "autoWidth": false,
+    });
+  });
+</script>
 </body>
 </html>

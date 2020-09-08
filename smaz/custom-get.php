@@ -1,7 +1,6 @@
 
     <option value="-">-Kosong-</option>
 <?php
-
 if($_POST['cawangan'] != "-"){
 
     $cawangan = $_POST['cawangan'];

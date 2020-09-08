@@ -34,7 +34,7 @@ Date:<br>
 </td>
 <td width="5%" style="vertical-align: middle">
 <div class="icheck-primary d-inline">
-    <input type="checkbox" id="checkboxDate">
+    <input type="checkbox" id="checkboxDate" onclick="">
     <label for="checkboxDate"></label>
 </div>
 </td>
@@ -84,6 +84,52 @@ IP Address:
 
 <!--script-->
 <script>
+    //disable
+    $(document).ready(function() {
+        document.getElementById('selAction').setAttribute('disabled', true);
+        document.getElementById('selController').setAttribute('disabled', true);
+        document.getElementById('date').setAttribute('disabled', true);
+        document.getElementById('txtip1').setAttribute('disabled', true);
+        document.getElementById('txtip2').setAttribute('disabled', true);
+    });
+
+    
+    
+
+    if((document.getElementById("checkboxDate")).checked == true){
+        document.getElementById('date').setAttribute('disabled', true);
+    }else{
+        document.getElementById('date').disabled=false;
+    }
+    if((document.getElementById("checkboxIP")).checked == true){
+        document.getElementById('txtip1').setAttribute('disabled', true);
+        document.getElementById('txtip2').setAttribute('disabled', true);
+    }else{
+        document.getElementById('txtip1').disabled=false;
+        document.getElementById('txtip2').disabled=false;
+    }
+
+    //checkbox date
+    $('#checkboxDate').change(function() {
+        if(document.getElementById('checkboxDate').checked == false) {
+            document.getElementById('date').setAttribute('disabled', true);
+        }else{
+            document.getElementById('date').disabled=false;
+        }
+    });
+
+    //checkbox ip
+    $('#checkboxIP').change(function() {
+        if(document.getElementById('checkboxIP').checked == false) {
+            document.getElementById('txtip1').setAttribute('disabled', true);
+            document.getElementById('txtip2').setAttribute('disabled', true);
+        }else{
+            document.getElementById('txtip1').disabled=false;
+            document.getElementById('txtip2').disabled=false;
+        }
+    });
+    
+    //onchange
     document.getElementById('selCawangan').onchange = function() {
         resetCawangan();
         $.ajax({
@@ -95,8 +141,11 @@ IP Address:
             success: function (response) {
                 // We get the element having id of display_info and put the response inside it
                 $( '#selController' ).html(response);
+                if(document.getElementById('selCawangan').value != "-"){
+                    document.getElementById('selController').disabled=false;
+                }
             }
-        });
+        }); 
     }
     document.getElementById('selController').onchange = function() {
         resetController();
@@ -110,6 +159,9 @@ IP Address:
             success: function (response) {
                 // We get the element having id of display_info and put the response inside it
                 $( '#selAction' ).html(response);
+                if(document.getElementById('selController').value != "-"){
+                    document.getElementById('selAction').disabled=false;
+                }
             }
         });
     }
@@ -121,6 +173,8 @@ IP Address:
                 //reset
                 $( '#selAction' ).html(response);
                 $( '#selController' ).html(response);
+                document.getElementById('selAction').setAttribute('disabled', true);
+                document.getElementById('selController').setAttribute('disabled', true);
             }
         });
     }
@@ -131,8 +185,9 @@ IP Address:
             success: function (response) {
                 //reset
                 $( '#selAction' ).html(response);
+                document.getElementById('selAction').setAttribute('disabled', true);
             }
-        });
+        });     
     }
     function click(){
         let time = "-"; let ip = "-";
@@ -150,15 +205,6 @@ IP Address:
 
         location.href = "report-custom-chart.php?cawangan="+cawangan+"&controller="+controller+"&action="+action+"&time="+time+"&ip="+ip;
     }
-
-    function date() {
-  var checkBox = document.getElementById("checkboxDate");
-  if (checkBox.checked == true){
-    
-  } else {
-     text.style.display = "none";
-  }
-}
 </script> 
 
 <script>
