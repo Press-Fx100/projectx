@@ -36,6 +36,31 @@
     <div class="content">
       <div class="container">
         <!-- Default box -->
+
+          <div class="row">
+            <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Timeline</b></h3>
+            <!--<div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                <i class="fas fa-times"></i></button>
+            </div>-->
+          </div>
+          
+          <div class="card-body">
+           <!--content here-->
+
+           <?php include("timeline-custom.php"); ?>
+
+           </div>     
+          <!-- /.card-body -->
+        </div>
+            </div>
+        <div class="col-md-6">
+          <!-- left column -->
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Report</h3>
@@ -59,9 +84,6 @@
           </div>-->
         <!-- /.card-footer-->
         </div>
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-6">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Table</b></h3>
@@ -81,29 +103,13 @@
            </div>     
           <!-- /.card-body -->
         </div>
-          </div>
-          <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Timeline</b></h3>
-            <!--<div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>-->
-          </div>
+        
           
-          <div class="card-body">
-           <!--content here-->
-
-           <?php include("timeline-custom.php"); ?>
-
-           </div>     
-          <!-- /.card-body -->
         </div>
           </div>
-        </div>
+
+        
+        
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

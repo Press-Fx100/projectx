@@ -4,7 +4,7 @@
 <div id="myProgress">
   <div id="myBar"></div>
 </div>
-
+<br><br><br><br><br><br><br><br>
   <!-- CHART GOES HERE -->
 </div>
 <br>

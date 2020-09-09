@@ -82,7 +82,7 @@
             <!-- The time line -->
             <div class="timeline">
                 <?php
-                $getData = "SELECT runtimeerrors.created, runtimeerrors.smazaction, runtimeerrors.smazcontroller, runtimeerrors.xcawangan_id, users.username
+                $getData = "SELECT runtimeerrors.created, runtimeerrors.data, runtimeerrors.smazaction, runtimeerrors.smazcontroller, runtimeerrors.xcawangan_id, users.username
                 FROM runtimeerrors JOIN users ON runtimeerrors.user_id = users.id";
 
                 $cawangan = $_GET["cawangan"];
@@ -134,7 +134,7 @@
                 if($ip != "-"){
                   $getData .= " AND INET_ATON(runtimeerrors.ip_address) BETWEEN INET_ATON('$ip1') AND INET_ATON('$ip2')";
                 }
-                $getData .= " LIMIT 10";
+                $getData .= " LIMIT 5";
 
                 $rows = $dbConnected->query($getData);
                 $rowcount = $rows->num_rows;
@@ -156,13 +156,17 @@
                               <span class='time'><i class='fas fa-clock'></i> ".explode(" ",$r['created'])[1]."</span>
                               <h3 class='timeline-header'><a href='#'>".$r['username']."</a></h3>
                               <div class='timeline-body'>
-                                controller: ".$r['smazcontroller']."<br>action: ".$r['smazaction']."<br>cawangan: ".$r['xcawangan_id']."
+                                <table class='table table-borderless'>
+                                  <tr>
+                                    <td>cawangan[".$r['xcawangan_id']."] &rarr; controller[".$r['smazcontroller']."]<br> &rarr; action[".$r['smazaction']."]</td>
+                                    <!--<td>".str_replace(";","<br>",(substr($r['data'],0,50)))."</td>-->
+                                  </tr>
+                                </table>
+                                
                               </div>
                             </div>
                         </div>
                         ";
-                        
-                    $i++;
                     }
                 }else{
                     echo"
