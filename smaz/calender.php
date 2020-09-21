@@ -1,6 +1,6 @@
 <?php 
 // Include the database config file 
-include_once ('dbconfig/dbconfig.php'); 
+include('dbconfig/dbconfig.php'); 
  
 /* 
  * Load function based on the Ajax request 
@@ -9,9 +9,6 @@ if(isset($_POST['func']) && !empty($_POST['func'])){
     switch($_POST['func']){ 
         case 'getCalender': 
             getCalender($_POST['year'],$_POST['month']); 
-            break; 
-        case 'getEvents': 
-            getEvents($_POST['date']); 
             break; 
         default: 
             break; 
@@ -22,8 +19,10 @@ if(isset($_POST['func']) && !empty($_POST['func'])){
  * Generate event calendar in HTML format 
  */ 
 function getCalender($year = '', $month = ''){ 
+
     $dateYear = ($year != '')?$year:date("Y"); 
     $dateMonth = ($month != '')?$month:date("m"); 
+    
     $date = $dateYear.'-'.$dateMonth.'-01'; 
     $currentMonthFirstDay = date("N",strtotime($date)); 
     $totalDaysOfMonth = cal_days_in_month(CAL_GREGORIAN,$dateMonth,$dateYear); 
@@ -36,22 +35,24 @@ function getCalender($year = '', $month = ''){
 ?> 
     <main class="calendar-contain"> 
         <section class="title-bar"> 
-            <a href="javascript:void(0);" class="title-bar__prev" onclick="getCalendar('calendar_div','<?php echo date("Y",strtotime($date.' - 1 Month')); ?>','<?php echo date("m",strtotime($date.' - 1 Month')); ?>');"></a> 
-            <div class="title-bar__month"> 
-                <select class="month-dropdown"> 
+        <div class="row">
+        <div class="col"><a href="javascript:void(0);" class="title-bar__prev" onclick="getCalendar('calendar_div','<?php echo date("Y",strtotime($date.' - 1 Month')); ?>','<?php echo date("m",strtotime($date.' - 1 Month')); ?>');"></a></div>
+        <div class="col"><div class="title-bar__month"> 
+                <select class="form-control select2bs4 month-dropdown"> 
                     <?php echo getMonthList($dateMonth); ?> 
                 </select> 
-            </div> 
-            <div class="title-bar__year"> 
-                <select class="year-dropdown"> 
+            </div></div>
+            <div class="col"><div class="title-bar__year"> 
+                <select class="form-control select2bs4 year-dropdown"> 
                     <?php echo getYearList($dateYear); ?> 
                 </select> 
-            </div> 
-            <a href="javascript:void(0);" class="title-bar__next" onclick="getCalendar('calendar_div','<?php echo date("Y",strtotime($date.' + 1 Month')); ?>','<?php echo date("m",strtotime($date.' + 1 Month')); ?>');"></a> 
-        </section> 
+            </div></div>
+            <div class="col"><a href="javascript:void(0);" class="title-bar__next" onclick="getCalendar('calendar_div','<?php echo date("Y",strtotime($date.' + 1 Month')); ?>','<?php echo date("m",strtotime($date.' + 1 Month')); ?>');"></a></div> 
+        </div>
+        </section>
          
         <aside class="calendar__sidebar" id="event_list"> 
-            <?php echo getEvents(); ?> 
+            <?php echo "<script>getEvents('".date("Y-m-d")."');</script>" ?> 
         </aside> 
          
         <section class="calendar__days"> 
@@ -73,33 +74,26 @@ function getCalender($year = '', $month = ''){
                 for($cb=1;$cb<=$boxDisplay;$cb++){ 
                     if(($cb >= $currentMonthFirstDay || $currentMonthFirstDay == 1) && $cb <= ($totalDaysOfMonthDisplay)){ 
                         // Current date 
-                        $currentDate = $dateYear.'-'.$dateMonth.'-'.$dayCount; 
-                         
+                        $currentDate = $dateYear.'-'.$dateMonth.'-'.$dayCount;  
+                        //$currentDate = '2020-07-21';  
                         // Get number of events based on the current date 
                         global $dbConnected; 
-                        $result = $dbConnected->query("SELECT smazcontroller, smazaction FROM runtimeerrors WHERE created LIKE '".$currentDate."%' AND xcawangan_id BETWEEN '1' AND '3' AND user_id BETWEEN '1' AND '107' LIMIT 1"); 
-                        $eventNum = $result->num_rows; 
+                        //$result = $dbConnected->query("SELECT ip_address FROM runtimeerrors WHERE created LIKE '".$currentDate."%' AND xcawangan_id = '2' AND user_id BETWEEN '1' AND '107' LIMIT 1"); 
+                        //$eventNum = $result->num_rows; 
                          
                         // Define date cell color 
                         if(strtotime($currentDate) == strtotime(date("Y-m-d"))){ 
                             echo ' 
-                                <div class="calendar__day today" onclick="getEvents(\''.$currentDate.'\');"> 
+                                <div class="btn btn-default calendar__day today" onclick="getEvents(\''.$currentDate.'\');"> 
                                     <span class="calendar__date">'.$dayCount.'</span> 
-                                    <span class="calendar__task calendar__task--today">'.$eventNum.' Events</span> 
-                                </div> 
-                            '; 
-                        }elseif($eventNum > 0){ 
-                            echo ' 
-                                <div class="calendar__day event" onclick="getEvents(\''.$currentDate.'\');"> 
-                                    <span class="calendar__date">'.$dayCount.'</span> 
-                                    <span class="calendar__task">'.$eventNum.' Events</span> 
+                                    <span class="calendar__task calendar__task--today"></span> 
                                 </div> 
                             '; 
                         }else{ 
                             echo ' 
-                                <div class="calendar__day no-event" onclick="getEvents(\''.$currentDate.'\');"> 
+                                <div class="btn btn-default calendar__day no-event" onclick="getEvents(\''.$currentDate.'\');"> 
                                     <span class="calendar__date">'.$dayCount.'</span> 
-                                    <span class="calendar__task">'.$eventNum.' Events</span> 
+                                    <span class="calendar__task"></span> 
                                 </div> 
                             '; 
                         } 
@@ -107,15 +101,15 @@ function getCalender($year = '', $month = ''){
                     }else{ 
                         if($cb < $currentMonthFirstDay){ 
                             $inactiveCalendarDay = ((($totalDaysOfMonth_Prev-$currentMonthFirstDay)+1)+$cb); 
-                            $inactiveLabel = 'expired'; 
+                            //$inactiveLabel = 'expired'; 
                         }else{ 
                             $inactiveCalendarDay = ($cb-$totalDaysOfMonthDisplay); 
-                            $inactiveLabel = 'upcoming'; 
+                            //$inactiveLabel = 'upcoming'; 
                         } 
                         echo ' 
-                            <div class="calendar__day inactive"> 
+                            <div class="btn btn-default calendar__day inactive"> 
                                 <span class="calendar__date">'.$inactiveCalendarDay.'</span> 
-                                <span class="calendar__task">'.$inactiveLabel.'</span> 
+                                <span class="calendar__task"></span> 
                             </div> 
                         '; 
                     } 
@@ -138,11 +132,22 @@ function getCalender($year = '', $month = ''){
             }); 
         } 
          
-        function getEvents(date){ 
+        /*function getEvents(date){ 
             $.ajax({ 
                 type:'POST', 
                 url:'calender.php', 
                 data:'func=getEvents&date='+date, 
+                success:function(html){ 
+                    $('#event_list').html(html); 
+                } 
+            }); 
+        } */
+
+        function getEvents(date){ 
+            $.ajax({ 
+                type:'POST', 
+                url:'calender-sidebar-queries.php', 
+                data:'date='+date, 
                 success:function(html){ 
                     $('#event_list').html(html); 
                 } 
@@ -156,7 +161,7 @@ function getCalender($year = '', $month = ''){
             $('.year-dropdown').on('change',function(){ 
                 getCalendar('calendar_div', $('.year-dropdown').val(), $('.month-dropdown').val()); 
             }); 
-        }); 
+        });
     </script> 
 <?php 
 } 
@@ -173,7 +178,7 @@ function getMonthList($selected = ''){
         $options .= '<option value="'.$value.'" '.$selectedOpt.' >'.date("F", mktime(0, 0, 0, $i+1, 0, 0)).'</option>'; 
     } 
     return $options; 
-} 
+}
  
 /* 
  * Generate years options list for select box 
@@ -188,28 +193,4 @@ function getYearList($selected = ''){
         $options .= '<option value="'.$i.'" '.$selectedOpt.' >'.$i.'</option>'; 
     } 
     return $options; 
-} 
- 
-/* 
- * Generate events list in HTML format 
- */ 
-function getEvents($date = ''){ 
-    $date = $date?$date:date("Y-m-d"); 
-     
-    $eventListHTML = '<h2 class="sidebar__heading">'.date("l", strtotime($date)).'<br>'.date("F d", strtotime($date)).'</h2>'; 
-     
-    // Fetch events based on the specific date 
-    global $dbConnected; 
-    $result = $dbConnected->query("SELECT smazcontroller, smazaction FROM runtimeerrors WHERE created LIKE '".$date."%' AND xcawangan_id BETWEEN '1' AND '3' AND user_id BETWEEN '1' AND '107' LIMIT 1"); 
-    if($result->num_rows > 0){ 
-        $eventListHTML .= '<ul class="sidebar__list">'; 
-        $eventListHTML .= '<li class="sidebar__list-item sidebar__list-item--complete">Events</li>'; 
-        $i=0; 
-        while($row = $result->fetch_assoc()){ $i++; 
-            $eventListHTML .= '<li class="sidebar__list-item"><span class="list-item__time">'.$i.'.</span>'.$row['smazcontroller'].' &rarr; '.$row['smazaction'].'</li>'; 
-        } 
-        $eventListHTML .= '</ul>'; 
-    } 
-    echo $eventListHTML; 
-    echo "SELECT smazcontroller, smazaction FROM runtimeerrors WHERE created LIKE '".$date."%' AND xcawangan_id BETWEEN '1' AND '3' AND user_id BETWEEN '1' AND '107' LIMIT 1";
 }

@@ -25,7 +25,7 @@
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item"><a href="#">Report</a></li>
-              <li class="breadcrumb-item active">Aras <?php echo $_GET['level'] ?></li>
+              <li class="breadcrumb-item active"><?php echo $_GET['lokasi'] ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

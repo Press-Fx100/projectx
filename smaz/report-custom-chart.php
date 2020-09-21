@@ -38,7 +38,7 @@
         <!-- Default box -->
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Timeline</b></h3>
@@ -59,7 +59,7 @@
           <!-- /.card-body -->
         </div>
             </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <!-- left column -->
         <div class="card">
           <div class="card-header">

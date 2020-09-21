@@ -43,23 +43,32 @@
         
       <div class="container">
         <!-- Default box -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><small>Cawangan &rarr; Controller &rarr; Action (<?php echo $_GET['actions'] ?>)</small></h3>
-            <!--<div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>-->
+        <div class="row">
+          <div class="col-md-5">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Timeline</h3>
+              </div>
+              <div class="card-body" id="timeline-table-action">
+              <!--content here-->
+              </div>     
+              <!-- /.card-body -->
+            </div>
           </div>
-           <div class="card-body">
-           <!--content here-->
-           <?php include("table-action.php"); ?>
-           </div>     
-          <!-- /.card-body -->
+          <div class="col-md-7">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><small>Cawangan &rarr; Controller &rarr; Action (<?php echo $_GET['actions'] ?>)</small></h3>
+              </div>
+              <div class="card-body">
+              <!--content here-->
+                <?php include("table-action.php"); ?>
+              </div>     
+            <!-- /.card-body -->
+            </div>
+          </div><!-- /.container-fluid -->
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </div>
     <!-- /.content -->  
   </div>
@@ -94,5 +103,22 @@
     });
   });
 </script>
+
+<script>
+$.ajax({
+    type: 'post',
+    url: 'timeline-table-action.php',
+    data: {
+        cawangan: "<?php echo $_GET['cawangan'] ?>",
+        controller: "<?php echo $_GET['controller'] ?>",
+        action: "<?php echo $_GET['actions'] ?>",
+    },
+    success: function (response) {
+        // We get the element having id of display_info and put the response inside it
+        $( '#timeline-table-action' ).html(response);
+    }
+});
+</script>
+
 </body>
 </html>

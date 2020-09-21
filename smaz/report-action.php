@@ -36,29 +36,47 @@
     <div class="content">
       <div class="container">
         <!-- Default box -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><small>Cawangan &rarr; Controller &rarr; Action</small></h3>
-            <!--<div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>-->
+        <div class="row">
+          <div class="col-md-5">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Timeline</b></h3>
+              </div>
+              <div id="timeline-action" class="card-body">
+                <!--content here-->
+              </div>     
+              <!-- /.card-body -->
+            </div>
           </div>
-           <div class="card-body">
-           <br>
-           <!--content here-->
-
-           <?php include("chart-js-action.php"); ?>
-
-           </div>     
-          <!-- /.card-body -->
+          <div class="col-md-7">
+            <!-- left column -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Report</h3>
+              </div>
+              <div class="card-body">
+                <!--content here-->
+                <?php include("chart-js-action.php"); ?>
+              </div>
+              <!-- /.card-body -->
+              <!-- /.card-footer-->
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Table</b></h3>
+              </div>
+              <div id="table-action" class="card-body">
+                <!--content here-->
+              </div>     
+              <!-- /.card-body -->
+            </div>
+          </div><!-- /.container-fluid -->
         </div>
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+        <!-- /.content -->
+      </div>
+    </div><!-- /.container-fluid -->
   </div>
+    <!-- /.content -->
   <!-- /.content-wrapper -->
 
 <?php include("footer.html"); ?>

@@ -21,11 +21,21 @@
             <a href="kalkulator pinjaman.php" class="nav-link">Kalkulator Pinjaman</a>
           </li>
           <li class="nav-item">
+            <a href="report-calender.php" class="nav-link">Calender</a>
+          </li>
+          <li class="nav-item">
             <a href="about us.php" class="nav-link">About Us</a>
           </li>
           <li class="nav-item">
             <a href="contact.php" class="nav-link">Contact</a>
           </li>
+
+          <li class="nav-item">
+            <a href="page-user-table.php" class="nav-link">User Data</a>
+          </li>
+
+          
+
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Report</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -35,34 +45,19 @@
               <!--<li class="dropdown-divider"></li>-->
 
               <!-- Level two dropdown-->
-              <li><a href="report-controller.php" class="dropdown-item">Full Report</a></li>
+              <li><a href="report-controller.php" class="dropdown-item">Default</a></li>
+              
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Lokasi</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  <li><a href="report-ipaddress.php?lokasi=paza" class="dropdown-item">PAZA</a></li>
+                  <li><a href="report-ipaddress.php?lokasi=perkim" class="dropdown-item">PERKIM</a></li>
+                </ul>
+              </li>
+              
               <li><a href="report-user-table.php" class="dropdown-item">User</a></li>
-              <li class="dropdown-submenu dropdown-hover">
-                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Aras</a>
-                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                  <li><a href="report-ipaddress.php?level=G" class="dropdown-item">Aras G</a></li>
-                  <li><a href="report-ipaddress.php?level=1" class="dropdown-item">Aras 1</a></li>
-                  <li><a href="report-ipaddress.php?level=2" class="dropdown-item">Aras 2</a></li>
-                  <li><a href="report-ipaddress.php?level=3" class="dropdown-item">Aras 3</a></li>
-                  <li><a href="report-ipaddress.php?level=4" class="dropdown-item">Aras 4</a></li>
-                  <li><a href="report-ipaddress.php?level=6" class="dropdown-item">Aras 6</a></li>
-                  <li><a href="report-ipaddress.php?level=7" class="dropdown-item">Aras 7</a></li>
-                  <li><a href="report-ipaddress.php?level=8" class="dropdown-item">Aras 8</a></li>
-                  <li><a href="report-ipaddress.php?level=11" class="dropdown-item">Aras 11</a></li>
-                  <li><a href="report-ipaddress.php?level=12" class="dropdown-item">Aras 12</a></li> 
-                  <li><a href="report-ipaddress.php?level=19" class="dropdown-item">Aras 19</a></li>
-                  <li><a href="report-ipaddress.php?level=20" class="dropdown-item">Aras 20</a></li>
-                  <li><a href="report-ipaddress.php?level=24" class="dropdown-item">Aras 22</a></li>
-                  <li><a href="report-ipaddress.php?level=25" class="dropdown-item">Aras 25</a></li>
-                </ul>
-              </li>
-              <li class="dropdown-submenu dropdown-hover">
-                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Year</a>
-                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                  <li><a href="report-year.php?year=2019" class="dropdown-item">2019</a></li>
-                  <li><a href="report-year.php?year=2020" class="dropdown-item">2020</a></li>
-                </ul>
-              </li>
+
+              <li><a href="report-custom.php" class="dropdown-item">Custom</a></li>
 
                   <!--<li><a href="#" class="dropdown-item">level 2</a></li>
                   <li><a href="#" class="dropdown-item">level 2</a></li>-->

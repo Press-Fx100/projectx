@@ -61,6 +61,7 @@
 
     //bar chart ready
     xhr.onreadystatechange = function() {
+      tabletimeline();
       if(xhr.readyState == 4 && xhr.status == 200) {
         document.getElementById('divChart').innerHTML = '<canvas id="cnvChart"></canvas>';
         
@@ -96,5 +97,31 @@
         }
         let chart = new Chart(document.getElementById('cnvChart'), chart_settings);
       }
+    }
+    function tabletimeline() {
+        $.ajax({
+            type: 'post',
+            url: 'table-default-action.php',
+            data: {
+                cawangan: "<?php echo $_GET['cawangan'] ?>",
+                controller: "<?php echo $_GET['controller'] ?>",
+            },
+            success: function (response) {
+                // We get the element having id of display_info and put the response inside it
+                $( '#table-action' ).html(response);
+            }
+        }); 
+        $.ajax({
+            type: 'post',
+            url: 'timeline-default-action.php',
+            data: {
+                cawangan: "<?php echo $_GET['cawangan'] ?>",
+                controller: "<?php echo $_GET['controller'] ?>",
+            },
+            success: function (response) {
+                // We get the element having id of display_info and put the response inside it
+                $( '#timeline-action' ).html(response);
+            }
+        }); 
     }
 </script> 

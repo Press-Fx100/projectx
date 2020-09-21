@@ -36,33 +36,47 @@
     <div class="content">
       <div class="container">
         <!-- Default box -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><small>Cawangan &rarr; Controller</small></h3>
-            <!--<div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>-->
+        <div class="row">
+            <div class="col-md-5">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Timeline</b></h3>
+                </div>
+                <div id="timeline-controller" class="card-body">
+                  <!--content here-->
+                </div>     
+                <!-- /.card-body -->
+              </div>
+            </div>
+            <div class="col-md-7">
+              <!-- left column -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Report</h3>
+                </div>
+                <div class="card-body">
+                  <!--content here-->
+                  <?php include("chart-js-controller.php"); ?>
+                </div>
+                <!-- /.card-body -->
+                <!-- /.card-footer-->
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Table</b></h3>
+                </div>
+                <div id="table-controller" class="card-body">
+                  <!--content here-->
+                </div>     
+                <!-- /.card-body -->
+              </div>
+            </div><!-- /.container-fluid -->
           </div>
-           <div class="card-body">
-           <!--content here-->
-
-           <?php include("chart-js-controller.php"); ?>
-
-           </div>
-          <!-- /.card-body -->
-          <!--<div class="card-footer">
-            Footer
-          </div>-->
-        <!-- /.card-footer-->
+          <!-- /.content -->
         </div>
-      </div><!-- /.container-fluid -->
+        <!-- /.content-wrapper -->
+      </div>
     </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
 <?php include("footer.html"); ?>
 </div>
